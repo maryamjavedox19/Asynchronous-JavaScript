@@ -4,7 +4,8 @@ const getTodos=(callback)=>{
     request.addEventListener('readystatechange', ()=>{
         // console.log(request, request.readyState);
         if(request.readyState===4 && request.status===200){    //state 4 means when it is done 
-            callback(undefined, request.responseText);
+            const data=JSON.parse(request.responseText);  //pasing json string into js object
+            callback(undefined, data);
         }
     
         else if(request.readyState===4){
@@ -12,7 +13,7 @@ const getTodos=(callback)=>{
         }
     });
     //  args:   type of request,           end point                                   
-    request.open('GET', 'https://jsonplaceholder.typicode.com/todos/');   //  set up a request     
+    request.open('GET', 'todos.json');   //  set up a request     
     request.send();
 }
 
